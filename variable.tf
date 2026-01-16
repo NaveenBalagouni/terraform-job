@@ -21,7 +21,7 @@ variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
   default     = ""  # Empty means use in-cluster config
-"
+
 }
 
 variable "namespace" {
