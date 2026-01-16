@@ -101,6 +101,10 @@ resource "helm_release" "tf_ssd" {
   wait             = true
 
   lifecycle {
+    ignore_changes = [version]  # fixes Helm provider version bug
     replace_triggered_by = [null_resource.clone_ssd_chart]
   }
+}
+
+
 }
