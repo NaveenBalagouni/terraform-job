@@ -31,9 +31,7 @@ resource "kubernetes_namespace" "opmsx_ns" {
     name = var.namespace
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
+
 }
 
 
