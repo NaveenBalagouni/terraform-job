@@ -20,7 +20,7 @@ variable "git_branch" {
 variable "kubeconfig_path" {
   description = "Path to kubeconfig file"
   type        = string
-  default     = "/root/.kube/config"
+  default     = ""  # Empty means use in-cluster config
 "
 }
 
