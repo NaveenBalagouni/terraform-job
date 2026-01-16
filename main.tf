@@ -29,6 +29,7 @@ provider "helm" {
 resource "kubernetes_namespace" "opmsx_ns" {
   metadata {
     name = var.namespace
+    create_namespace = false 
   }
 
 
