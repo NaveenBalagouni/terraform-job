@@ -107,4 +107,3 @@ resource "helm_release" "tf_ssd" {
 }
 
 
-}
