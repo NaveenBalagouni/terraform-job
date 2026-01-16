@@ -51,6 +51,6 @@ variable "helm_release_name" {
 variable "cert_manager_installed" {
   description = "Set to true if cert-manager is installed"
   type        = bool
-  default     = true
+  default     = false
 }
 
