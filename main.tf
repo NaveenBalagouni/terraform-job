@@ -93,7 +93,7 @@ resource "helm_release" "tf_ssd" {
     value = join(",", var.ingress_hosts)
   }
 
-  create_namespace = true
+  create_namespace = false
   force_update     = true
   recreate_pods    = true
   cleanup_on_fail  = true
