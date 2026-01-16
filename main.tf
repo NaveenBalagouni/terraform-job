@@ -32,7 +32,10 @@ resource "kubernetes_namespace" "opmsx_ns" {
     
   }
 
-
+lifecycle {
+    prevent_destroy = true      # keeps it from being deleted
+    ignore_changes  = [metadata] # ignores any future changes if namespace already exists
+  }
 
 }
 
