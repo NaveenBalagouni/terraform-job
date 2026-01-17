@@ -60,9 +60,10 @@ resource "helm_release" "tf_ssd" {
   name      = "ssd-terraform"
   namespace = var.namespace
 
-  create_namespace = false
+ 
   chart            = "/tmp/enterprise-ssd/charts/ssd"
   values           = [data.local_file.ssd_values.content]
+  create_namespace = false
 
   set {
     name  = "ingress.enabled"
