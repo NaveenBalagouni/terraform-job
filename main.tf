@@ -25,10 +25,8 @@ provider "helm" {
   }
 }
 
-# ❌ Namespace REMOVED (already exists)
-
 # -----------------------------
-# Clone Helm Chart Repo
+# Clone SSD Helm Chart Repo
 # -----------------------------
 resource "null_resource" "clone_ssd_chart" {
   triggers = {
@@ -54,15 +52,14 @@ data "local_file" "ssd_values" {
 }
 
 # -----------------------------
-# Deploy SSD Helm Releases
+# Deploy SSD Helm Release
 # -----------------------------
 resource "helm_release" "tf_ssd" {
-  for_each = toset(var.ingress_hosts)
-
   depends_on = [null_resource.clone_ssd_chart]
 
-  name             = "ssd-terraform"
-  namespace        = var.namespace
+  name      = "ssd-terraform"
+  namespace = var.namespace
+
   create_namespace = false
   chart            = "/tmp/enterprise-ssd/charts/ssd"
   values           = [data.local_file.ssd_values.content]
