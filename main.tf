@@ -38,7 +38,6 @@ resource "null_resource" "clone_ssd_chart" {
     command = <<EOT
       rm -rf /tmp/enterprise-ssd
       git clone --branch ${var.git_branch} ${var.git_repo_url} /tmp/enterprise-ssd
-      ls -l /tmp/enterprise-ssd/charts/ssd
     EOT
   }
 }
@@ -60,14 +59,14 @@ resource "helm_release" "tf_ssd" {
   name      = "ssd-terraform"
   namespace = var.namespace
 
- 
-  chart            = "/tmp/enterprise-ssd/charts/ssd"
-  values           = [data.local_file.ssd_values.content]
+  chart  = "/tmp/enterprise-ssd/charts/ssd"
+  values = [data.local_file.ssd_values.content]
+
   create_namespace = false
 
   set {
     name  = "ingress.enabled"
-    value = "true"
+    value = true
   }
 
   set {
@@ -80,12 +79,12 @@ resource "helm_release" "tf_ssd" {
     value = join(",", var.ingress_hosts)
   }
 
-  force_update    = true
-  recreate_pods   = true
-  cleanup_on_fail = true
   wait            = true
+  cleanup_on_fail = true
+  atomic          = true
+  timeout         = 600
 
   lifecycle {
-    replace_triggered_by = [null_resource.clone_ssd_chart]
+    prevent_destroy = true
   }
 }
