@@ -80,11 +80,12 @@ resource "helm_release" "tf_ssd" {
   }
 
   wait            = true
-  cleanup_on_fail = true
+  cleanup_on_fail = false     # keep resources for debugging
   timeout         = 600 
   atomic          = false   # prevent automatic uninstall on failure
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes  = [values, set]  # avoid unnecessary redeploys
   }
 }
