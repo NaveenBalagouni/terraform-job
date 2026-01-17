@@ -81,8 +81,8 @@ resource "helm_release" "tf_ssd" {
 
   wait            = true
   cleanup_on_fail = true
-  atomic          = false
   timeout         = 1800 
+  atomic  = false   # prevent automatic uninstall on failure
 
   lifecycle {
     prevent_destroy = true
