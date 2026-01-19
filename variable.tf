@@ -11,7 +11,7 @@ variable "git_repo_url" {
 variable "git_branch" {
   description = "Git branch to clone (for upgrades)"
   type        = string
-  default     = "2025-04"
+  default     = "2025-05"
 }
 
 # -----------------------------
